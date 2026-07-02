@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluasi Workshop PJOK</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Sembunyikan elemen secara default untuk perpindahan view */
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+    </style>
+</head>
+<body class="bg-blue-50 py-8 px-4 font-sans text-gray-800">
+
+    <!-- Container Utama -->
+    <div id="app-container" class="max-w-3xl mx-auto transition-all duration-300">
+        
+        <!-- ==================== VIEW FORM ==================== -->
+        <div id="view-form" class="view-section active">
+            <!-- Header -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6 border-t-8 border-indigo-600">
+                <div class="p-8">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-4 leading-tight">
+                        Evaluasi Workshop Penguatan Implementasi Pembelajaran Mendalam PJOK SMP DIY
+                    </h1>
+                    <div class="w-20 h-1 bg-indigo-500 mb-6"></div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Terima kasih telah mengikuti Workshop Penguatan Implementasi Pembelajaran Mendalam PJOK SMP se-Daerah Istimewa Yogyakarta.
+                    </p>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Masukan Bapak/Ibu sangat berarti untuk meningkatkan kualitas kegiatan dan materi pada workshop berikutnya.
+                    </p>
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-lg p-4 flex items-start gap-3">
+                        <i data-lucide="book-open" class="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5"></i>
+                        <p class="text-sm text-indigo-800">
+                            Waktu pengisian sekitar <strong>5 menit</strong>. Semua isian wajib diisi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="evaluation-form">
+                <!-- Bagian A: Identitas -->
+                <div class="bg-white rounded-xl shadow-md mb-6 overflow-hidden">
+                    <div class="bg-indigo-600 px-6 py-3 flex items-center gap-2 text-white">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                        <h2 class="text-xl font-semibold">BAGIAN A: Identitas Peserta</h2>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap (beserta gelar)</label>
+                            <input type="text" name="nama" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" placeholder="Ketik nama Anda di sini...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Asal Sekolah</label>
+                            <input type="text" name="asalSekolah" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" placeholder="Misal: SMP Negeri 1 Yogyakarta">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Kabupaten/Kota</label>
+                            <select name="kabupaten" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition bg-white">
+                                <option value="" disabled selected>Pilih Kabupaten/Kota</option>
+                                <option value="Kota Yogyakarta">Kota Yogyakarta</option>
+                                <option value="Sleman">Sleman</option>
+                                <option value="Bantul">Bantul</option>
+                                <option value="Kulon Progo">Kulon Progo</option>
+                                <option value="Gunungkidul">Gunungkidul</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-4 mb-6 text-center border border-gray-200">
+                    <p class="text-sm font-medium text-gray-700">
+                        Gunakan skala berikut untuk seluruh butir evaluasi di bawah ini:<br/>
+                        <span class="inline-block mt-2 px-3 py-1 bg-red-100 text-red-800 rounded-md text-xs font-bold mx-1">1 = Sangat Tidak Setuju</span>
+                        <span class="inline-block mt-2 px-3 py-1 bg-green-100 text-green-800 rounded-md text-xs font-bold mx-1">5 = Sangat Setuju</span>
+                    </p>
+                </div>
+
+                <!-- Bagian B, C, D, E akan digenerate otomatis menggunakan JavaScript -->
+                <div id="questions-container"></div>
+
+                <!-- Bagian F: Pertanyaan Terbuka -->
+                <div class="bg-white rounded-xl shadow-md mb-6 overflow-hidden">
+                    <div class="bg-indigo-600 px-6 py-3 flex items-center gap-2 text-white">
+                        <i data-lucide="message-square" class="w-5 h-5"></i>
+                        <h2 class="text-xl font-semibold">BAGIAN F: Pertanyaan Terbuka</h2>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-2">1. Materi yang paling bermanfaat bagi Bapak/Ibu adalah...</label>
+                            <textarea name="F1" required rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Jawaban Anda..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-2">2. Hal baru yang diperoleh setelah mengikuti workshop ini adalah...</label>
+                            <textarea name="F2" required rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Jawaban Anda..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-2">3. Bagian yang masih perlu diperbaiki dari kegiatan ini adalah...</label>
+                            <textarea name="F3" required rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Jawaban Anda..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-2">4. Saran untuk penyelenggaraan workshop berikutnya:</label>
+                            <textarea name="F4" required rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Jawaban Anda..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-3">5. Apakah Bapak/Ibu akan menerapkan hasil workshop di sekolah?</label>
+                            <div class="flex flex-col space-y-2">
+                                <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-50 rounded border border-transparent hover:border-gray-200 transition">
+                                    <input type="radio" name="F5" value="Ya" required class="w-5 h-5 text-indigo-600 focus:ring-indigo-500">
+                                    <span class="text-gray-700">Ya</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-50 rounded border border-transparent hover:border-gray-200 transition">
+                                    <input type="radio" name="F5" value="Mungkin" required class="w-5 h-5 text-indigo-600 focus:ring-indigo-500">
+                                    <span class="text-gray-700">Mungkin</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-50 rounded border border-transparent hover:border-gray-200 transition">
+                                    <input type="radio" name="F5" value="Belum" required class="w-5 h-5 text-indigo-600 focus:ring-indigo-500">
+                                    <span class="text-gray-700">Belum</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center gap-4 mb-10">
+                    <button type="submit" id="submit-btn" class="w-full md:w-auto px-10 py-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-bold rounded-xl shadow-lg transition transform hover:-translate-y-1">
+                        Kirim Evaluasi
+                    </button>
+                    <button type="button" id="btn-to-admin" class="text-gray-400 hover:text-gray-600 text-xs mt-4 underline decoration-dotted">
+                        Akses Penyelenggara (Rekap Data)
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ==================== VIEW SUCCESS ==================== -->
+        <div id="view-success" class="view-section h-screen flex items-center justify-center -mt-10">
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full text-center border-t-8 border-indigo-600">
+                <i data-lucide="check-circle" class="w-20 h-20 text-green-500 mx-auto mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Terima Kasih!</h2>
+                <p class="text-gray-600 mb-6">Masukan Bapak/Ibu telah berhasil disimpan dan sangat berarti bagi peningkatan kualitas kegiatan kami.</p>
+                <div class="flex flex-col gap-3">
+                    <button type="button" id="btn-back-form" class="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
+                        Isi Tanggapan Lain
+                    </button>
+                    <button type="button" id="btn-to-admin-from-success" class="text-indigo-600 hover:underline text-sm font-medium">
+                        Lihat Rekap Data (Admin)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== VIEW ADMIN ==================== -->
+    <div id="view-admin" class="view-section max-w-6xl mx-auto">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="bg-indigo-800 p-6 text-white flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold">Dashboard Admin</h2>
+                    <p class="text-indigo-200">Rekapitulasi Evaluasi Workshop PJOK</p>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" id="btn-back-form-admin" class="bg-indigo-700 hover:bg-indigo-600 px-4 py-2 rounded-lg text-sm font-medium transition">
+                        Kembali ke Form
+                    </button>
+                    <button type="button" id="btn-export-csv" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition shadow-md">
+                        <i data-lucide="download" class="w-4 h-4"></i> Export CSV (Excel)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6 overflow-x-auto" id="admin-table-container">
+                <!-- Tabel akan diisi melalui JavaScript -->
+                <div class="text-center py-10 text-gray-500">
+                    <i data-lucide="clipboard-list" class="w-16 h-16 mx-auto mb-3 opacity-50"></i>
+                    <p>Memuat data evaluasi...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Utama (Menggunakan ES Modules untuk Firebase) -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getFirestore, collection, addDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
+
+        // --- Data & Pertanyaan ---
+        const sectionsData = [
+            {
+                id: 'B', title: 'BAGIAN B: Evaluasi Materi 1',
+                subtitle: 'Kerangka Pembelajaran Mendalam PJOK Fase D',
+                questions: [
+                    "Tujuan materi disampaikan dengan jelas.",
+                    "Materi mudah dipahami.",
+                    "Materi sesuai dengan kebutuhan guru PJOK SMP.",
+                    "Penjelasan mengenai konsep Mindful, Meaningful, dan Joyful mudah dipahami.",
+                    "Penjelasan mengenai Kerangka Pembelajaran Mendalam membantu meningkatkan pemahaman saya.",
+                    "Contoh implementasi yang diberikan relevan dengan pembelajaran PJOK.",
+                    "Materi dapat saya terapkan di sekolah.",
+                    "Narasumber menguasai materi dengan baik.",
+                    "Narasumber mampu menjawab pertanyaan peserta.",
+                    "Saya puas terhadap penyampaian materi pertama."
+                ]
+            },
+            {
+                id: 'C', title: 'BAGIAN C: Evaluasi Materi 2',
+                subtitle: 'Perencanaan Pembelajaran Mendalam PJOK Fase D',
+                questions: [
+                    "Penjelasan mengenai analisis CP menjadi TP mudah dipahami.",
+                    "Penjelasan penyusunan ATP mudah dipahami.",
+                    "Contoh perencanaan pembelajaran mudah diikuti.",
+                    "Materi membantu saya menyusun perangkat pembelajaran.",
+                    "Pembahasan asesmen autentik sangat bermanfaat.",
+                    "Contoh strategi pembelajaran di lapangan sesuai dengan kondisi sekolah.",
+                    "Materi meningkatkan kemampuan saya dalam menyusun pembelajaran mendalam.",
+                    "Narasumber menyampaikan materi secara sistematis.",
+                    "Diskusi berlangsung interaktif.",
+                    "Saya puas terhadap materi kedua."
+                ]
+            },
+            {
+                id: 'D', title: 'BAGIAN D: Evaluasi Materi 3',
+                subtitle: 'Integrasi AI (ChatGPT & Gemini Canvas) dalam PJOK',
+                questions: [
+                    "Saya memperoleh wawasan baru mengenai pemanfaatan AI.",
+                    "Demonstrasi penggunaan ChatGPT mudah dipahami.",
+                    "Demonstrasi penggunaan Gemini Canvas mudah dipahami.",
+                    "Integrasi AI dapat membantu penyusunan perangkat pembelajaran PJOK.",
+                    "AI membantu menghasilkan media pembelajaran lebih kreatif.",
+                    "AI membantu menghemat waktu dalam perencanaan pembelajaran.",
+                    "Saya merasa percaya diri untuk menggunakan AI setelah mengikuti materi ini.",
+                    "Contoh prompt yang diberikan mudah diterapkan.",
+                    "Materi relevan dengan kebutuhan guru saat ini.",
+                    "Saya puas terhadap materi ketiga."
+                ]
+            },
+            {
+                id: 'E', title: 'BAGIAN E: Evaluasi Penyelenggaraan Workshop',
+                subtitle: 'Evaluasi Penyelenggaraan Kegiatan',
+                questions: [
+                    "Kegiatan berjalan sesuai jadwal.",
+                    "Fasilitas kegiatan memadai.",
+                    "Tempat pelaksanaan nyaman.",
+                    "Panitia memberikan pelayanan yang baik.",
+                    "Waktu diskusi cukup.",
+                    "Materi antar narasumber saling berkaitan.",
+                    "Workshop bermanfaat bagi peningkatan kompetensi saya.",
+                    "Saya akan menerapkan hasil workshop di sekolah.",
+                    "Saya bersedia mengikuti kegiatan serupa di masa mendatang.",
+                    "Secara keseluruhan saya puas terhadap workshop."
+                ]
+            }
+        ];
+
+        // --- Render Pertanyaan Skala Linear ---
+        const questionsContainer = document.getElementById('questions-container');
+        let htmlContent = '';
+
+        sectionsData.forEach(section => {
+            htmlContent += `
+                <div class="bg-white rounded-xl shadow-md mb-6 overflow-hidden">
+                    <div class="bg-indigo-600 px-6 py-3 flex items-center gap-2 text-white">
+                        <i data-lucide="star" class="w-5 h-5"></i>
+                        <h2 class="text-xl font-semibold">${section.title}</h2>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-gray-800 mb-4">${section.subtitle}</h3>
+            `;
+            
+            section.questions.forEach((q, index) => {
+                const name = `${section.id}${index + 1}`;
+                htmlContent += `
+                    <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-100">
+                        <p class="mb-3 text-sm font-medium text-gray-800">${index + 1}. ${q}</p>
+                        <div class="flex flex-wrap justify-between max-w-md items-center gap-2">
+                            <span class="text-xs text-gray-500 hidden sm:block">Sangat Tidak Setuju</span>
+                `;
+                for (let num = 1; num <= 5; num++) {
+                    htmlContent += `
+                            <label class="flex flex-col items-center cursor-pointer">
+                                <span class="mb-1 text-xs font-semibold text-gray-600">${num}</span>
+                                <input type="radio" name="${name}" value="${num}" required class="w-5 h-5 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                            </label>
+                    `;
+                }
+                htmlContent += `
+                            <span class="text-xs text-gray-500 hidden sm:block">Sangat Setuju</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            htmlContent += `</div></div>`;
+        });
+        
+        questionsContainer.innerHTML = htmlContent;
+        lucide.createIcons(); // Inisialisasi icon setelah DOM dimodifikasi
+
+        // --- State Management ---
+        let submissions = [];
+        let currentUser = null;
+
+        // --- Firebase Init ---
+        let app, auth, db, appId;
+        const initFirebase = async () => {
+            try {
+                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+                // Setup Auth
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                // Listen for Auth State
+                onAuthStateChanged(auth, (user) => {
+                    currentUser = user;
+                    if (user) {
+                        fetchData();
+                    }
+                });
+
+            } catch (error) {
+                console.error("Firebase init error:", error);
+            }
+        };
+
+        const fetchData = () => {
+            if (!currentUser || !db) return;
+            const evalsRef = collection(db, 'artifacts', appId, 'public', 'data', 'evaluations');
+            
+            onSnapshot(evalsRef, (snapshot) => {
+                submissions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderAdminTable();
+            }, (error) => {
+                console.error("Error fetching data:", error);
+            });
+        };
+
+        // --- View Navigation ---
+        const switchView = (viewName) => {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(`view-${viewName}`).classList.add('active');
+            window.scrollTo(0, 0);
+        };
+
+        document.getElementById('btn-to-admin').addEventListener('click', () => switchView('admin'));
+        document.getElementById('btn-to-admin-from-success').addEventListener('click', () => switchView('admin'));
+        document.getElementById('btn-back-form').addEventListener('click', () => {
+            document.getElementById('evaluation-form').reset();
+            switchView('form');
+        });
+        document.getElementById('btn-back-form-admin').addEventListener('click', () => switchView('form'));
+
+        // --- Form Submission ---
+        document.getElementById('evaluation-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!currentUser || !db) {
+                alert('Menunggu koneksi database, silakan coba lagi beberapa saat.');
+                return;
+            }
+
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerHTML = 'Menyimpan...';
+            btn.classList.add('bg-gray-400');
+            btn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+
+            // Ambil semua data form
+            const formData = new FormData(e.target);
+            const dataObj = Object.fromEntries(formData.entries());
+            dataObj.timestamp = new Date().toLocaleString('id-ID');
+            dataObj.userId = currentUser.uid;
+
+            try {
+                const evalsRef = collection(db, 'artifacts', appId, 'public', 'data', 'evaluations');
+                await addDoc(evalsRef, dataObj);
+                switchView('success');
+            } catch (error) {
+                console.error("Gagal menyimpan:", error);
+                alert("Terjadi kesalahan saat menyimpan data.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Kirim Evaluasi';
+                btn.classList.remove('bg-gray-400');
+                btn.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+            }
+        });
+
+        // --- Admin Table Render ---
+        const renderAdminTable = () => {
+            const container = document.getElementById('admin-table-container');
+            if (submissions.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 text-gray-500">
+                        <i data-lucide="clipboard-list" class="w-16 h-16 mx-auto mb-3 opacity-50"></i>
+                        <p>Belum ada data evaluasi yang masuk.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            let tableHTML = `
+                <table class="min-w-full text-sm text-left whitespace-nowrap">
+                    <thead class="bg-gray-100 text-gray-700">
+                        <tr>
+                            <th class="px-4 py-3 rounded-tl-lg">Waktu</th>
+                            <th class="px-4 py-3">Nama</th>
+                            <th class="px-4 py-3">Sekolah</th>
+                            <th class="px-4 py-3">Kab/Kota</th>
+                            <th class="px-4 py-3 text-center" title="Rata-rata Materi 1">Rata B</th>
+                            <th class="px-4 py-3 text-center" title="Rata-rata Materi 2">Rata C</th>
+                            <th class="px-4 py-3 text-center" title="Rata-rata Materi 3">Rata D</th>
+                            <th class="px-4 py-3 text-center" title="Rata-rata Penyelenggaraan">Rata E</th>
+                            <th class="px-4 py-3 rounded-tr-lg">Penerapan</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+            `;
+
+            submissions.forEach(sub => {
+                const calcAvg = (prefix) => {
+                    let sum = 0;
+                    for(let i=1; i<=10; i++) sum += Number(sub[`${prefix}${i}`] || 0);
+                    return (sum / 10).toFixed(1);
+                };
+
+                const avgB = calcAvg('B');
+                const avgC = calcAvg('C');
+                const avgD = calcAvg('D');
+                const avgE = calcAvg('E');
+                
+                let badgeClass = sub.F5 === 'Ya' ? 'bg-green-100 text-green-800' : 
+                                 sub.F5 === 'Mungkin' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800';
+
+                tableHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 text-gray-500">${sub.timestamp || '-'}</td>
+                        <td class="px-4 py-3 font-medium">${sub.nama || '-'}</td>
+                        <td class="px-4 py-3">${sub.asalSekolah || '-'}</td>
+                        <td class="px-4 py-3">${sub.kabupaten || '-'}</td>
+                        <td class="px-4 py-3 text-center font-bold text-indigo-600">${avgB}</td>
+                        <td class="px-4 py-3 text-center font-bold text-blue-600">${avgC}</td>
+                        <td class="px-4 py-3 text-center font-bold text-teal-600">${avgD}</td>
+                        <td class="px-4 py-3 text-center font-bold text-purple-600">${avgE}</td>
+                        <td class="px-4 py-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium ${badgeClass}">${sub.F5 || '-'}</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                    </tbody>
+                </table>
+                <p class="text-xs text-gray-400 mt-4">* Untuk melihat seluruh jawaban termasuk isian paragraf, silakan klik tombol Export CSV di atas.</p>
+            `;
+            container.innerHTML = tableHTML;
+            lucide.createIcons();
+        };
+
+        // --- Export CSV ---
+        document.getElementById('btn-export-csv').addEventListener('click', () => {
+            if (submissions.length === 0) return;
+
+            // Perbaikan: Tentukan urutan header yang benar (tidak berantakan)
+            const baseHeaders = ['timestamp', 'nama', 'asalSekolah', 'kabupaten'];
+            const bHeaders = Array.from({length: 10}, (_, i) => `B${i+1}`);
+            const cHeaders = Array.from({length: 10}, (_, i) => `C${i+1}`);
+            const dHeaders = Array.from({length: 10}, (_, i) => `D${i+1}`);
+            const eHeaders = Array.from({length: 10}, (_, i) => `E${i+1}`);
+            const fHeaders = ['F1', 'F2', 'F3', 'F4', 'F5'];
+            
+            // Gabungkan semua header secara berurutan
+            const orderedHeaders = [...baseHeaders, ...bHeaders, ...cHeaders, ...dHeaders, ...eHeaders, ...fHeaders];
+            
+            // Buat baris header untuk CSV
+            let csvContent = orderedHeaders.join(',') + '\n';
+
+            submissions.forEach(sub => {
+                const row = orderedHeaders.map(header => {
+                    let val = sub[header] || '';
+                    let strVal = String(val);
+                    // Escape karakter khusus CSV (koma, baris baru, tanda kutip)
+                    if (strVal.includes(',') || strVal.includes('\n') || strVal.includes('"')) {
+                        strVal = `"${strVal.replace(/"/g, '""')}"`;
+                    }
+                    return strVal;
+                });
+                csvContent += row.join(',') + '\n';
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Rekap_Evaluasi_Workshop_PJOK.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // Jalankan Inisialisasi
+        initFirebase();
+    </script>
+</body>
+</html>
